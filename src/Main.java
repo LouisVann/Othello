@@ -13,7 +13,7 @@ public class Main {
 
         int stepCount = 0;
         Player currentPlayer = players[stepCount % Settings.PLAYERS_NUM];
-        while (!judge.isGameOver()) {
+        while (true) {
             if (judge.canMove(currentPlayer.getColor())) {
                 int[] decision = currentPlayer.getDecision();
                 if (judge.isLegal(decision[0], decision[1], currentPlayer.getColor())) {
@@ -21,11 +21,17 @@ public class Main {
                     chessBoard.putOnChess(decision[0], decision[1], currentPlayer.getColor());
                     print(chessBoard.toString());
                 } else {    // invalid move
-                    Settings.output("Invalid move.\nGame over." + players[(stepCount + 1) % Settings.PLAYERS_NUM].getShape() + "player wins.");
+                    print("Invalid move.\nGame over." + players[(stepCount + 1) % Settings.PLAYERS_NUM].getShape() + "player wins.");
                     return;
                 }
-            } else {    // cannot move in this round
-                Settings.output(currentPlayer.getShape() + " player has no valid move.");
+            } else {    // current player cannot move in this round
+                if (! judge.canMove(players[(1 + stepCount) % Settings.PLAYERS_NUM].getColor())) {
+                    // next player cannot move, either
+                    print("Both players have no valid move.\nGame Over.");
+                    return;
+                }
+                // next player can move
+                print(currentPlayer.getShape() + " player has no valid move.");
             }
             stepCount ++;
             currentPlayer = players[stepCount % Settings.PLAYERS_NUM];
@@ -72,6 +78,7 @@ public class Main {
             players[1] = new Computer(ChessPiece.PieceColor.white);
         }
     }
+
 
     public static void print(String s) {
         Settings.output(s);

@@ -51,30 +51,49 @@ public class ChessBoard {
 
     class Judge {
         private int computePoint(int row, int col, ChessPiece.PieceColor color) {
+            if (board[row][col] != null)
+                return 0;
             int point = 0;
             for (int i = 0; i < directions.length; i ++) {
-
+                int this_x = row, this_y = col, sum = 0;
+                while (checkNextPiece(this_x, this_y, directions[i][0], directions[i][1], color)) {
+                    sum ++;
+                    this_x += directions[i][0];
+                    this_y += directions[i][1];
+                }
+                if (checkNextPiece(this_x, this_y, directions[i][0], directions[i][1], board[this_x][this_y].getColor()))
+                    point += sum;
             }
 
             return point;
         }
 
+        private boolean checkNextPiece(int this_x, int this_y, int dx, int dy, ChessPiece.PieceColor origin_color) {
+            return this_x + dx >= 0 && this_x + dx < dimension
+                    && this_y + dy >= 0 && this_y + dy < dimension
+                    && board[this_x + dx][this_y + dy] != null
+                    && board[this_x + dx][this_y + dy].getColor() != origin_color;
+        }
+
         public boolean isLegal(int row, int col, ChessPiece.PieceColor color) {
             if (row < 0 || row >= dimension || col < 0 || col >= dimension)
                 throw new RuntimeException("Position out of the chessboard.");
-            if (board[row][col] != null)
-                return false;
             return computePoint(row, col, color) > 0;
         }
 
-        public boolean isGameOver() {
-
+        public boolean canMove(ChessPiece.PieceColor color) {
+            for (int i = 0; i < dimension; i ++) {
+                for (int j = 0; j < dimension; j ++) {
+                    if (isLegal(i, j, color))
+                        return true;
+                }
+            }
             return false;
         }
 
-        public boolean canMove(ChessPiece.PieceColor color) {
-            return true;
-        }
+//        public boolean isGameOver() {
+//            return  canMove(ChessPiece.PieceColor.white) || canMove(ChessPiece.PieceColor.black);
+//        }
 
 
     }
