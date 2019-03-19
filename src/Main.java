@@ -16,7 +16,7 @@ public class Main {
         while (!judge.isGameOver()) {
             if (judge.canMove(currentPlayer.getColor())) {
                 int[] decision = currentPlayer.getDecision();
-                if (judge.isLegal(decision, currentPlayer.getColor())) {
+                if (judge.isLegal(decision[0], decision[1], currentPlayer.getColor())) {
                     // put on a new chess onto the chessboard
                     chessBoard.putOnChess(decision[0], decision[1], currentPlayer.getColor());
                     print(chessBoard.toString());
