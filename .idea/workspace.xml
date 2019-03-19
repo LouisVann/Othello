@@ -6,13 +6,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/Othello/ChessBoard$Judge.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/ChessBoard$Judge.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Othello/ChessBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/ChessBoard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Othello/Computer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/Computer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Othello/META-INF/Othello.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Othello/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Othello/Man.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/Man.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Othello/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Othello/Write.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Othello/Write.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,7 +46,7 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="760">
+                <state relative-caret-position="664">
                   <caret line="74" column="61" lean-forward="true" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
                   <folding>
                     <element signature="e#1782#1783#0" expanded="true" />
@@ -180,8 +177,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552997410000" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javacsv.jar!/" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552997445180" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -251,7 +248,7 @@
       <workItem from="1552793625796" duration="110000" />
       <workItem from="1552929510364" duration="1533000" />
       <workItem from="1552966591277" duration="4016000" />
-      <workItem from="1552991149004" duration="5093000" />
+      <workItem from="1552991149004" duration="5155000" />
     </task>
     <task id="LOCAL-00001" summary="add the ChessPiece class">
       <created>1552970411222</created>
@@ -267,15 +264,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552970583434</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Judge partly added">
+      <created>1552997444383</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1552997444383</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35685000" />
+    <option name="totallyTimeSpent" value="35747000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48212352" visible="true" weight="0.108742006" />
       <window_info id="Structure" order="1" sideWeight="0.5178765" side_tool="true" visible="true" weight="0.108742006" />
@@ -315,7 +318,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add the ChessPiece class" />
     <MESSAGE value="nothing" />
-    <option name="LAST_COMMIT_MESSAGE" value="nothing" />
+    <MESSAGE value="Judge partly added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Judge partly added" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Judge.java" />
@@ -430,7 +434,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
+        <state relative-caret-position="664">
           <caret line="74" column="61" lean-forward="true" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
           <folding>
             <element signature="e#1782#1783#0" expanded="true" />
