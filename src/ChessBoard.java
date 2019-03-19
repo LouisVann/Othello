@@ -1,5 +1,5 @@
 public class ChessBoard {
-    public char[][] board;
+    public ChessPiece[][] board;
     private int dimension;
 
     public ChessBoard(int dimension) {
@@ -7,29 +7,23 @@ public class ChessBoard {
             throw new RuntimeException("Illegal dimension!");
         } else {
             this.dimension = dimension;
-            board = new char[dimension][dimension];
-            for (int i = 0; i < dimension; i ++) {
-                for (int j = 0; j < dimension; j ++)
-                    board[i][j] = '.';
-            }
+            board = new ChessPiece[dimension][dimension];
             int ul = dimension / 2 - 1;
-            board[ul][ul] = 'O';
-            board[ul][ul + 1] = 'X';
-            board[ul + 1][ul] = 'X';
-            board[ul + 1][ul + 1] = 'O';
+            board[ul][ul] = new ChessPiece(ChessPiece.PieceColor.white);
+            board[ul][ul + 1] = new ChessPiece(ChessPiece.PieceColor.black);
+            board[ul + 1][ul] = new ChessPiece(ChessPiece.PieceColor.black);
+            board[ul + 1][ul + 1] = new ChessPiece(ChessPiece.PieceColor.white);
 
         }
 
     }
 
-    public void putOnChess(int[] decision, char shape) {
-        if (decision.length != 2)
-            throw new RuntimeException("Wrong format of decision!");
-        board[decision[0]][decision[1]] = shape;
-        takeEffect(decision, shape);
+    public void putOnChess(int row, int col, ChessPiece.PieceColor color) {
+        board[row][col] = new ChessPiece(color);
+        takeEffect(row, col, color);
     }
 
-    private void takeEffect(int[] decision, char shape) {
+    private void takeEffect(int row, int col, ChessPiece.PieceColor color) {
         ///////////////////////////////////////////////////////////////////////--change board
     }
 
@@ -54,11 +48,11 @@ public class ChessBoard {
             return false;
         }
 
-        public boolean canMove(char shape) {
+        public boolean canMove(ChessPiece.PieceColor color) {
             return true;
         }
 
-        public boolean isLegal(int[] position, char shape) {
+        public boolean isLegal(int[] position, ChessPiece.PieceColor color) {
             return true;
         }
     }

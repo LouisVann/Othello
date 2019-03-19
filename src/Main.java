@@ -14,11 +14,11 @@ public class Main {
         int stepCount = 0;
         Player currentPlayer = players[stepCount % Settings.PLAYERS_NUM];
         while (!judge.isGameOver()) {
-            if (judge.canMove(currentPlayer.getShape())) {
+            if (judge.canMove(currentPlayer.getColor())) {
                 int[] decision = currentPlayer.getDecision();
-                if (judge.isLegal(decision, currentPlayer.getShape())) {
+                if (judge.isLegal(decision, currentPlayer.getColor())) {
                     // put on a new chess onto the chessboard
-                    chessBoard.putOnChess(decision, currentPlayer.getShape());
+                    chessBoard.putOnChess(decision[0], decision[1], currentPlayer.getColor());
                     print(chessBoard.toString());
                 } else {    // invalid move
                     Settings.output("Invalid move.\nGame over." + players[(stepCount + 1) % Settings.PLAYERS_NUM].getShape() + "player wins.");
@@ -64,17 +64,13 @@ public class Main {
 
     private static void setRoles() {
         String input = askRoles();
-        Player man = new Man();
-        Player computer = new Computer();
         if (input.equals("X")) {
-            players[0] = computer;
-            players[1] = man;
+            players[0] = new Computer(ChessPiece.PieceColor.black);
+            players[1] = new Man(ChessPiece.PieceColor.white);
         } else {
-            players[0] = man;
-            players[1] = computer;
+            players[0] = new Man(ChessPiece.PieceColor.black);
+            players[1] = new Computer(ChessPiece.PieceColor.white);
         }
-        players[0].setShape('X');
-        players[1].setShape('O');
     }
 
     public static void print(String s) {
