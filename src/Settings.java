@@ -5,10 +5,10 @@ public class Settings {
     public static final int PLAYERS_NUM = 2;
     public static final Scanner scanner = new Scanner(System.in);
     public static void output(Object o) {
-        if (o instanceof String && o.toString().charAt(o.toString().length() - 1) == ':') {
+        if (o instanceof String && o.toString().length() >= 1 && o.toString().charAt(o.toString().length() - 1) == ':')
             System.out.print(o);
-        } else {
+        else
             System.out.println(o);
-        }
     }
+
 }

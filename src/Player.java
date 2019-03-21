@@ -1,48 +1,77 @@
 public abstract class Player {
     private ChessPiece.PieceColor color;
     private char shape;
+    private String name;
 
-    public Player(ChessPiece.PieceColor color) {
+    Player(ChessPiece.PieceColor color) {
         this.color = color;
         shape = color == ChessPiece.PieceColor.white ? 'O' : 'X';
     }
 
-    public ChessPiece.PieceColor getColor() {
+    ChessPiece.PieceColor getColor() {
         return color;
     }
 
-    public char getShape() {
+    char getShape() {
         return shape;
     }
 
-    public abstract int[] getDecision();
+    String getName() {
+        return name;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    public abstract int[] getDecision(ChessBoard chessBoard);
 
 }
 
 class Man extends Player {
-    public Man(ChessPiece.PieceColor color) {
+    Man(ChessPiece.PieceColor color) {
         super(color);
+        setName("human");
     }
+
     @Override
-    public int[] getDecision() {
+    public int[] getDecision(ChessBoard chessBoard) {
         Settings.output("Enter move for " + getShape() + " (RowCol):");
         String positionString = Settings.scanner.nextLine().toLowerCase();
-        while (positionString.length() != 2 || positionString.charAt(0) < 97 || positionString.charAt(0) > 96 + Settings.MAX_DIMENSION ||
-                positionString.charAt(1) < 97 || positionString.charAt(1) > 96 + Settings.MAX_DIMENSION) {
+        while (positionString.length() != 2 || positionString.charAt(0) < 'a' || positionString.charAt(0) > 'a' - 1 + Settings.MAX_DIMENSION ||
+                positionString.charAt(1) < 'a' || positionString.charAt(1) > 'a' - 1 + Settings.MAX_DIMENSION) {
             Settings.output("Illegal position! Please input again.");
             positionString = Settings.scanner.nextLine().toLowerCase();
         }
-        return new int[]{positionString.charAt(0) - 97, positionString.charAt(1) - 97};
+
+        return new int[]{positionString.charAt(0) - 'a', positionString.charAt(1) - 'a'};
     }
 }
 
 class Computer extends Player {
-    public Computer(ChessPiece.PieceColor color) {
+    Computer(ChessPiece.PieceColor color) {
         super(color);
+        setName("computer");
     }
+
     @Override
-    public int[] getDecision() {
+    public int[] getDecision(ChessBoard chessBoard) {
         ////////////////////////////////////////////////////////////////////
-        return new int[]{0, 0};
+        int returnX = 0, returnY = 0, maxPoint = 0;
+        ChessPiece[][] board = chessBoard.getBoard();
+        for (int i = 0; i < board.length; i ++) {
+            for (int j = 0; j < board[0].length; j ++) {
+                if (chessBoard.judge.computePoint(i, j, getColor()) > maxPoint) {
+                    maxPoint = chessBoard.judge.computePoint(i, j, getColor());
+                    returnX = i;
+                    returnY = j;
+                }
+            }
+        }
+
+        Settings.output("Computer places " + getShape() + " at "
+                + (char)(returnX + 'a') + (char)(returnY + 'a') + ".");
+
+        return new int[]{returnX, returnY};
     }
 }

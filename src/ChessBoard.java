@@ -1,33 +1,60 @@
+import java.util.ArrayList;
+
 public class ChessBoard {
     private ChessPiece[][] board;
     private int dimension;
+    public Judge judge;
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public ChessPiece[][] getBoard() {
+        return board;
+    }
 
     private  int[][] directions = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 
     public ChessBoard(int dimension) {
+        judge = new Judge();
+
         if (dimension < 4 || dimension > Settings.MAX_DIMENSION) {
             throw new RuntimeException("Illegal dimension!");
         } else {
             this.dimension = dimension;
             board = new ChessPiece[dimension][dimension];
+
             int ul = dimension / 2 - 1;
             board[ul][ul] = new ChessPiece(ChessPiece.PieceColor.white);
             board[ul][ul + 1] = new ChessPiece(ChessPiece.PieceColor.black);
             board[ul + 1][ul] = new ChessPiece(ChessPiece.PieceColor.black);
             board[ul + 1][ul + 1] = new ChessPiece(ChessPiece.PieceColor.white);
-
         }
 
     }
 
     public void putOnChess(int row, int col, ChessPiece.PieceColor color) {
         board[row][col] = new ChessPiece(color);
-        takeEffect(row, col, color);
+        //takeEffect(row, col, color);
+        ArrayList<ChessPiece> pieces;
+        for (int i = 0; i < directions.length; i ++) {
+            pieces = new ArrayList<>();
+            int thisX = row, thisY = col;
+            while (judge.checkNextPiece(thisX, thisY, directions[i][0], directions[i][1], color)) {
+                pieces.add(board[thisX + directions[i][0]][thisY + directions[i][1]]);
+                thisX += directions[i][0];
+                thisY += directions[i][1];
+            }
+
+            if (board[thisX][thisY] != null && judge.checkNextPiece(thisX, thisY, directions[i][0], directions[i][1], board[thisX][thisY].getColor()))
+                for (ChessPiece piece : pieces)
+                    piece.changeColor();
+        }
     }
 
-    private void takeEffect(int row, int col, ChessPiece.PieceColor color) {
-        ///////////////////////////////////////////////////////////////////////--change board
-    }
+//    private void takeEffect(int row, int col, ChessPiece.PieceColor color) {
+//        ///////////////////////////////////////////////////////////////////////--change board
+//    }
 
     @Override
     public String toString() {
@@ -50,29 +77,44 @@ public class ChessBoard {
     }
 
     class Judge {
-        private int computePoint(int row, int col, ChessPiece.PieceColor color) {
+        public int[] getResult() {
+            int blackNum = 0, whiteNum = 0;
+            for (int i = 0; i < board.length; i ++) {
+                for (int j = 0; j < board[0].length; j ++) {
+                    if (board[i][j] != null) {
+                        if (board[i][j].getColor() == ChessPiece.PieceColor.black)
+                            blackNum ++;
+                        else
+                            whiteNum ++;
+                    }
+                }
+            }
+            return new int[]{blackNum, whiteNum};
+        }
+
+        public int computePoint(int row, int col, ChessPiece.PieceColor color) {
             if (board[row][col] != null)
                 return 0;
             int point = 0;
-            for (int i = 0; i < directions.length; i ++) {
-                int this_x = row, this_y = col, sum = 0;
-                while (checkNextPiece(this_x, this_y, directions[i][0], directions[i][1], color)) {
+            for (int i = 0; i < directions.length; i ++) { // check eight directions
+                int thisX = row, thisY = col, sum = 0;
+                while (checkNextPiece(thisX, thisY, directions[i][0], directions[i][1], color)) {
                     sum ++;
-                    this_x += directions[i][0];
-                    this_y += directions[i][1];
+                    thisX += directions[i][0];
+                    thisY += directions[i][1];
                 }
-                if (checkNextPiece(this_x, this_y, directions[i][0], directions[i][1], board[this_x][this_y].getColor()))
+                if (board[thisX][thisY] != null && checkNextPiece(thisX, thisY, directions[i][0], directions[i][1], board[thisX][thisY].getColor()))
                     point += sum;
             }
 
             return point;
         }
 
-        private boolean checkNextPiece(int this_x, int this_y, int dx, int dy, ChessPiece.PieceColor origin_color) {
-            return this_x + dx >= 0 && this_x + dx < dimension
-                    && this_y + dy >= 0 && this_y + dy < dimension
-                    && board[this_x + dx][this_y + dy] != null
-                    && board[this_x + dx][this_y + dy].getColor() != origin_color;
+        private boolean checkNextPiece(int thisX, int thisY, int dx, int dy, ChessPiece.PieceColor origin_color) {
+            return thisX + dx >= 0 && thisX + dx < dimension
+                    && thisY + dy >= 0 && thisY + dy < dimension
+                    && board[thisX + dx][thisY + dy] != null
+                    && board[thisX + dx][thisY + dy].getColor() != origin_color;
         }
 
         public boolean isLegal(int row, int col, ChessPiece.PieceColor color) {
@@ -98,3 +140,4 @@ public class ChessBoard {
 
     }
 }
+
