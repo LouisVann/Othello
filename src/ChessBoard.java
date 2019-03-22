@@ -9,7 +9,7 @@ public class ChessBoard {
         return dimension;
     }
 
-    public ChessPiece[][] getBoard() {
+    ChessPiece[][] getBoard() {
         return board;
     }
 

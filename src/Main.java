@@ -15,19 +15,18 @@ public class Main {
         chessBoard = new ChessBoard(askBoardDimension());
         ChessBoard.Judge judge = chessBoard.judge;
 
-        setRoles(); // 设置players
+        setRoles(); // set players in the instruction of users
         print(chessBoard.toString());
         stepCount = 0;
+        Player currentPlayer = players[stepCount % Settings.PLAYERS_NUM];
 
         startTime = System.nanoTime();
 
-        Player currentPlayer = players[stepCount % Settings.PLAYERS_NUM];
-
         while (true) {
             if (judge.canMove(currentPlayer.getColor())) { // current player can move in this round
-                int[] decision = currentPlayer.getDecision(chessBoard);
+                int[] decision = currentPlayer.getDecision(chessBoard); // get the new piece's position by some strategy
                 if (judge.isLegal(decision[0], decision[1], currentPlayer.getColor())) {
-                    chessBoard.putOnChess(decision[0], decision[1], currentPlayer.getColor()); // put on a new chess onto the chessboard
+                    chessBoard.putOnChess(decision[0], decision[1], currentPlayer.getColor()); // put on the new piece onto the chessboard
                     print(chessBoard.toString());
                 } else {    // invalid move
                     gameOver(1);
@@ -47,9 +46,7 @@ public class Main {
             stepCount ++;
             currentPlayer = players[stepCount % Settings.PLAYERS_NUM];
         }
-        // Game is already over now
-
-        ////////////////////////////////////////// 计算输赢
+        // Game is already over now, the following will never reach
 
     }
 
@@ -96,7 +93,6 @@ public class Main {
         }
 
     }
-
 
     private static int askBoardDimension() {
         print("Enter the board dimension:");
