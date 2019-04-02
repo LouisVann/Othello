@@ -38,9 +38,10 @@ class Man extends Player {
     public int[] getDecision(ChessBoard chessBoard) {
         Settings.output("Enter move for " + getShape() + " (RowCol):");
         String positionString = Settings.scanner.nextLine().toLowerCase();
+
         while (positionString.length() != 2 || positionString.charAt(0) < 'a' || positionString.charAt(0) > 'a' - 1 + Settings.MAX_DIMENSION ||
                 positionString.charAt(1) < 'a' || positionString.charAt(1) > 'a' - 1 + Settings.MAX_DIMENSION) {
-            Settings.output("Illegal position! Please input again.");
+            Settings.output("Illegal position! Please input position again.");
             positionString = Settings.scanner.nextLine().toLowerCase();
         }
 

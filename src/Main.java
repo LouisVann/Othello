@@ -25,6 +25,7 @@ public class Main {
         while (true) {
             if (judge.canMove(currentPlayer.getColor())) { // current player can move in this round
                 int[] decision = currentPlayer.getDecision(chessBoard); // get the new piece's position by some strategy
+
                 if (judge.isLegal(decision[0], decision[1], currentPlayer.getColor())) {
                     chessBoard.putOnChess(decision[0], decision[1], currentPlayer.getColor()); // put on the new piece onto the chessboard
                     print(chessBoard.toString());
@@ -65,6 +66,7 @@ public class Main {
                 else
                     print("Draw!");
                 break;
+
             case 1: // Illegal move
                 print("Invalid move.\nGame over.\n" + players[(stepCount + 1) % Settings.PLAYERS_NUM].getShape() + " player wins.");
                 break;
