@@ -52,10 +52,6 @@ public class ChessBoard {
         }
     }
 
-//    private void takeEffect(int row, int col, ChessPiece.PieceColor color) {
-//        ///////////////////////////////////////////////////////////////////////--change board
-//    }
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder().append("  ");
@@ -92,7 +88,7 @@ public class ChessBoard {
             return new int[]{blackNum, whiteNum};
         }
 
-        public int computePoint(int row, int col, ChessPiece.PieceColor color) {
+        int computePoint(int row, int col, ChessPiece.PieceColor color) {
             if (board[row][col] != null)
                 return 0;
             int point = 0;
@@ -132,11 +128,6 @@ public class ChessBoard {
             }
             return false;
         }
-
-//        public boolean isGameOver() {
-//            return  canMove(ChessPiece.PieceColor.white) || canMove(ChessPiece.PieceColor.black);
-//        }
-
 
     }
 }

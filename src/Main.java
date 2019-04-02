@@ -97,7 +97,7 @@ public class Main {
     private static int askBoardDimension() {
         print("Enter the board dimension:");
         String input = scanner.nextLine();
-        while (! input.matches("\\d+") || Integer.valueOf(input) < 4 || Integer.valueOf(input) > 10) {
+        while (! input.matches("\\d+") || Integer.valueOf(input) < 4 || Integer.valueOf(input) > Settings.MAX_DIMENSION) {
             print("Illegal input! Try again:");
             input = scanner.nextLine();
         }
