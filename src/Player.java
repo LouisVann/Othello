@@ -41,7 +41,7 @@ class Man extends Player {
 
         while (positionString.length() != 2 || positionString.charAt(0) < 'a' || positionString.charAt(0) > 'a' - 1 + Settings.MAX_DIMENSION ||
                 positionString.charAt(1) < 'a' || positionString.charAt(1) > 'a' - 1 + Settings.MAX_DIMENSION) {
-            Settings.output("Illegal position! Please input position again.");
+            Settings.output("Illegal position! Please input again.");
             positionString = Settings.scanner.nextLine().toLowerCase();
         }
 
